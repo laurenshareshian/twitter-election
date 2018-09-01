@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "exit 0",
+    "start": "nodemon server.js"
+  },
+  "author": "Lauren Shareshian",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "i": "^0.3.6",
+    "morgan": "^1.9.0",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1",
+    "twitter-node-client": "0.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "nodemon": "^1.18.3"
+  },
+  "description": ""
+}
