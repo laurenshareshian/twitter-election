@@ -1,28 +1,41 @@
 <template>
 <section>
-<ChoicesForm :on-add="handleAdd"> </ChoicesForm>
-<Politicians :state="state"
-             :pol1="pol1"
-             :pol2="pol2"></Politicians>
+  <ChoicesForm :on-add="handleAdd"> </ChoicesForm>
+  <Politicians :state="state"
+              :pol1="pol1"
+              :pol2="pol2"></Politicians>
+  <ul v-if="displayTweets">
+    <Tweet v-for="(tweet, index) in filteredTweets"
+    :key="index"
+    :tweet="tweet">
+    </Tweet>
+  </ul>
+  <div class="filtered-results">
+    <FilteredResults :screen-name="screenName1"></FilteredResults>
+    <FilteredResults :screen-name="screenName2"></FilteredResults>
+  </div>
 </section>
 </template>
 
 <script>
-import Tweet from './Tweet';
+
 import ChoicesForm from './ChoicesForm.vue';
 import Politicians from './Politicians.vue';
-import api from '../../services/api';
+import FilteredResults from './FilteredResults.vue';
 export default {
   data() {
     return { 
       tweets: null,
-      filtered_tweets: null,
+      filteredTweets: null,
       stateChoice: null,
       issueChoice: null,
       state: null,
       issue: null,
       pol1: null,
-      pol2: null
+      pol2: null,
+      displayTweets: null,
+      screenName1: null,
+      screenName2: null
     };
   },
   created() {
@@ -51,42 +64,50 @@ export default {
       { id: 4, name: 'Economy', searchTerms: ['economy', 'trade', 'manufacturing'] },
       { id: 5, name: 'Defense', searchTerms: ['defense', 'army', 'troops', 'navy'] }
     ];
+    // api.getTweets({ screenName: 'realdonaldtrump' })
+    //   .then(tweets => {
+    //     this.tweets = tweets;
+    //   })
+    //   .then(() => this.filterTweets(this.tweets))
+    //   .then(() => this.displayTweets = true);
   },
   components: { 
     ChoicesForm,
     Politicians,
+    FilteredResults
   },
   methods: {
     handleAdd(choice) {
-      console.log(choice);
       this.stateChoice = choice.state;
       this.issueChoice = choice.issue;
-      console.log('choice', choice);
       this.findPoliticians();
       this.findIssueKeywords();
+      this.findScreenName();
       return choice;
     }, 
     findPoliticians(){
       this.state = this.states[this.stateChoice - 1].name;
       this.pol1 = this.states[this.stateChoice - 1].pol1;
       this.pol2 = this.states[this.stateChoice - 1].pol2;
-      console.log(this.state, this.pol1, this.pol2);
     },
     findIssueKeywords(){
       this.issueKeywords = this.issues[this.issueChoice - 1].searchTerms;
-      console.log(this.issueKeywords);
     },
-    filterTweets(tweets) {
-      let filtered_tweets = [];
-      for(let i = 0; i < tweets.length; i++){
-        let tweet = tweets[i].text;
-        let words = tweet.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
-        if(words.some(r=> ['gun', 'guns', 'nra'].indexOf(r) >= 0)){
-          filtered_tweets.push(tweet);
-        }
-      }
-      return filtered_tweets;
-    }
+    findScreenName() {
+      this.screenName1 = this.states[this.stateChoice - 1].twitter1;
+      this.screenName2 = this.states[this.stateChoice - 1].twitter2;
+    },
+    // filterTweets(tweets) {
+    //   console.log('inside filtered');
+    //   this.filteredTweets = [];
+    //   for(let i = 0; i < tweets.length; i++){
+    //     let tweet = tweets[i];
+    //     let words = tweet.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
+    //     if(words.some(r=> ['gun', 'guns', 'nra'].indexOf(r) >= 0)){
+    //       this.filteredTweets.push({ text: tweet.text, created_at: tweet.created_at });
+    //     }
+    //   }
+    // }
   }
 };
 </script>
@@ -95,5 +116,15 @@ export default {
 .flex-box{
   display: flex;
   justify-content: space-around;
+}
+
+ul.list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.filtered-results {
+  display: flex;
 }
 </style>

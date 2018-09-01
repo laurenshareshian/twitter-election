@@ -1,6 +1,6 @@
 <template id="tweet-template">
   <article>
-      {{tweet}}
+      <p>{{tweet['created_at'].substring(4,10)}}: {{tweet['text']}}</p>
   </article>
 </template>
 

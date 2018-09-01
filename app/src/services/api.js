@@ -1,8 +1,10 @@
 export default {
   // new tweets from twitter
-  getTweets() {
+  getTweets(screenName) {
     return fetch('http://localhost:3000/api/tweets', {
-      headers: { 'Content-Type': 'application/json' }
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(screenName)
     })
       .then(response => response.json());
   },

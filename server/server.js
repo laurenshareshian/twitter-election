@@ -54,8 +54,10 @@ function readData() {
 // 2) PATH, i.e. '/api/houses` === the requested path
 
 
-app.get('/api/tweets', (req, res) => {
-  let screen_name = 'senfeinstein';
+app.post('/api/tweets', (req, res) => {
+  const body = req.body;
+  let screen_name = body.screenName;
+  console.log(body);
   var params = { screen_name: screen_name, count: 200 };
   var data = [];
   var max_id = 0;
