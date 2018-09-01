@@ -19,15 +19,9 @@ app.use(cors());
 // request body to deserialized request.body property
 app.use(express.json());
 
-// var Twitter = require('twitter-node-client').Twitter;
-// var Twitter = require('twitter');
-var Twit = require('twit');
+// connect to the database
+const client = require('./db-client');
 
-var config = require('./config.js');
-
-
-//var twitter = new Twitter(config);
-var twitter = new Twit(config);
 
 /* TEMP DATABASE SOLUTION */
 
@@ -53,7 +47,14 @@ function readData() {
 // 1) HTTP METHOD, i.e. app.get === for GET requests
 // 2) PATH, i.e. '/api/houses` === the requested path
 
+var Twit = require('twit');
 
+var config = require('./config.js');
+
+//var twitter = new Twitter(config);
+var twitter = new Twit(config);
+
+// get all tweets from screenname
 app.post('/api/tweets', (req, res) => {
   const body = req.body;
   let screen_name = body.screenName;
@@ -89,17 +90,6 @@ app.post('/api/tweets', (req, res) => {
   });
 });
 
-app.post('/api/tweets', (req, res) => {
-
-  const data = readData();
-  data.push(req.body);
-  // save file
-  fs.writeFileSync(dataPath, JSON.stringify(data));
-
-  res.send(req.body);
-});
-
-
 // read directly from json, not directly from twitter
 app.get('/api/oldtweets', (req, res) => {
   const data = readData();
@@ -127,6 +117,26 @@ function handleTweets(error, max_id, tweets, data, screen_name) {
     return [max_id, old_max_id, data, params];
   }
 }
+
+app.get('/api/states', (req, res) => {
+  client.query(`
+    SELECT *
+    FROM states;
+  `)
+    .then(result => {
+      res.send(result.rows);
+    });
+});
+
+app.get('/api/issues', (req, res) => {
+  client.query(`
+    SELECT *
+    FROM issues;
+  `)
+    .then(result => {
+      res.send(result.rows);
+    });
+});
 
 /* RUN THE SERVER */
 

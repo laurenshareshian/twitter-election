@@ -8,18 +8,22 @@ export default {
     })
       .then(response => response.json());
   },
-  // directly from my json, not from twitter
+  // get tweets directly from my json, not from twitter
   getOldTweets() {
     return fetch('http://localhost:3000/api/oldtweets', {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json());
   },
-  addTweet(tweet) {
-    return fetch('http://localhost:3000/api/tweets', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(tweet)
+  getStates() {
+    return fetch('http://localhost:3000/api/states', {
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => response.json());
+  },
+  getIssues() {
+    return fetch('http://localhost:3000/api/issues', {
+      headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json());
   }

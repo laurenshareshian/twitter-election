@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Gun Control", 
+        "searchTerms": ["gun", "guns", "nra", "shooting"] 
+    },
+    {
+        
+        "name": "Environment", 
+        "searchTerms": ["climate", "pollution", "water", "warming", "environment"] 
+    },
+    {
+        "name": "Womens Health", 
+        "searchTerms": ["abortion", "abortions", "reproductive", "parenthood"] 
+    },
+    {
+        "name": "Economy", 
+        "searchTerms": ["economy", "trade", "manufacturing"] 
+    },
+    {
+        "name": "Defense", 
+        "searchTerms": ["defense", "army", "troops", "navy"] 
+    }
+]
