@@ -1,5 +1,6 @@
 <template id="filter">
-    <div v-if="displayReady">
+    <div v-if="display">
+          {{display}}
         <h3> @{{screenName}} </h3>
         <Tweet v-for="(tweet, index) in filteredTweets"
         :key="index"
@@ -12,9 +13,18 @@
 import api from '../../services/api';
 import Tweet from './Tweet';
 
+const initIssues = () => {
+  return {
+    name: '',
+    searchterms: ''
+  };
+};
+
+
 export default {
   props: {
-    screenName: String
+    screenName: String,
+    issueChoice: Number
   },
   data() {
     return { 
@@ -25,39 +35,41 @@ export default {
     Tweet
   },
   computed: {
-    displayReady() {
-      if(!this.filteredTweets){
+    display() {
+      if(!this.screenName || !this.issues[this.issueChoice - 1]) {
         return null;
       }
-      else {
-        return true;
-      }
-    }
+      const search = Object.assign({}, this.issues[this.issueChoice - 1]).searchterms;
+      console.log(search);
+      return search;
+    },
   },
   created() {
+    api.getIssues()
+      .then(issues => {
+        this.issues = issues;
+      });
     api.getOldTweets()
     // api.getTweets({ screenName: this.screenName })
       .then(tweets => {
-        console.log('screenname', this.screenName);
         this.tweets = tweets;
       })
       .then(() => this.filterTweets(this.tweets));
   },
   methods: {
     filterTweets(tweets) {
-      console.log('inside filter ');
       this.filteredTweets = [];
       for(let i = 0; i < tweets.length; i++){
         let tweet = tweets[i];
-
         let words = tweet.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
         if(words.some(r=> ['gun', 'guns', 'nra'].indexOf(r) >= 0)){
           this.filteredTweets.push({ text: tweet.text, created_at: tweet.created_at });
         }
       }
     }
-  },
+  }
 };
+
 </script>
 
 <style>

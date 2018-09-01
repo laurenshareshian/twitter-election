@@ -5,8 +5,12 @@
               :pol1="pol1"
               :pol2="pol2"></Politicians>
   <div class="filtered-results">
-    <FilteredResults :screen-name="screenName1"></FilteredResults>
-    <FilteredResults :screen-name="screenName2"></FilteredResults>
+    <FilteredResults :screen-name="screenName1"
+                     :issue-choice="issueChoice">
+                     </FilteredResults>
+    <FilteredResults :screen-name="screenName2"
+                     :issue-choice="issueChoice">
+                     </FilteredResults>
   </div>
 </section>
 </template>
@@ -21,12 +25,9 @@ import api from '../../services/api';
 export default {
   data() {
     return { 
-      tweets: null,
-      filteredTweets: null,
       stateChoice: null,
       issueChoice: null,
       state: null,
-      issue: null,
       pol1: null,
       pol2: null,
       screenName1: null,
@@ -37,12 +38,6 @@ export default {
     api.getStates()
       .then(states => {
         this.states = states;
-        console.log('states', this.states);
-      });
-    api.getIssues()
-      .then(issues => {
-        this.issues = issues;
-        console.log('issues', this.issues);
       });
   },
   components: { 
@@ -55,7 +50,6 @@ export default {
       this.stateChoice = choice.state;
       this.issueChoice = choice.issue;
       this.findPoliticians();
-      this.findIssueKeywords();
       this.findScreenName();
       return choice;
     }, 
@@ -63,9 +57,6 @@ export default {
       this.state = this.states[this.stateChoice - 1].name;
       this.pol1 = this.states[this.stateChoice - 1].pol1;
       this.pol2 = this.states[this.stateChoice - 1].pol2;
-    },
-    findIssueKeywords(){
-      this.issueKeywords = this.issues[this.issueChoice - 1].searchTerms;
     },
     findScreenName() {
       this.screenName1 = this.states[this.stateChoice - 1].twitter1;

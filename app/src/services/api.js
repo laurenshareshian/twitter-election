@@ -17,7 +17,7 @@ export default {
   },
   getStates() {
     return fetch('http://localhost:3000/api/states', {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     })
       .then(response => response.json());
   },
