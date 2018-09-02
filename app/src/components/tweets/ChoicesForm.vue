@@ -94,7 +94,6 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.choice);
       this.onAdd(this.choice);
     }
   }

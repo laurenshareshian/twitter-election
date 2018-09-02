@@ -97,7 +97,6 @@ app.get('/api/oldtweets', (req, res) => {
   res.send(data);
 });
 
-
 function handleTweets(error, max_id, tweets, data, screen_name) {
   if(!error) {
     for(let i = 0; i < tweets.length; i++){

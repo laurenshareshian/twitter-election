@@ -1,8 +1,7 @@
 <template id="filter">
-    <div v-if="display">
-          {{display}}
+    <div v-if="tweets.length">
         <h3> @{{screenName}} </h3>
-        <Tweet v-for="(tweet, index) in filteredTweets"
+        <Tweet v-for="(tweet, index) in this.filterTweets(tweets)"
         :key="index"
         :tweet="tweet">
         </Tweet>
@@ -10,62 +9,37 @@
 </template>
 
 <script>
-import api from '../../services/api';
 import Tweet from './Tweet';
-
-const initIssues = () => {
-  return {
-    name: '',
-    searchterms: ''
-  };
-};
-
 
 export default {
   props: {
     screenName: String,
-    issueChoice: Number
-  },
-  data() {
-    return { 
-      filteredTweets: null,
-    };
+    searchTerms: Array,
+    tweets: Array 
   },
   components: {
     Tweet
   },
-  computed: {
-    display() {
-      if(!this.screenName || !this.issues[this.issueChoice - 1]) {
-        return null;
-      }
-      const search = Object.assign({}, this.issues[this.issueChoice - 1]).searchterms;
-      console.log(search);
-      return search;
-    },
-  },
-  created() {
-    api.getIssues()
-      .then(issues => {
-        this.issues = issues;
-      });
-    api.getOldTweets()
-    // api.getTweets({ screenName: this.screenName })
-      .then(tweets => {
-        this.tweets = tweets;
-      })
-      .then(() => this.filterTweets(this.tweets));
-  },
   methods: {
+    // filterTweets(tweets) {
+    //   let filteredTweets = [];
+    //   for(let i = 0; i < tweets.length; i++){
+    //     let tweet = tweets[i];
+    //     let words = tweet.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
+    //     if(words.some(r=> this.searchTerms.indexOf(r) >= 0)){
+    //       filteredTweets.push({ text: tweet.text, created_at: tweet.created_at });
+    //     }
+    //   }
+    //   return filteredTweets;
+    // }
     filterTweets(tweets) {
-      this.filteredTweets = [];
-      for(let i = 0; i < tweets.length; i++){
-        let tweet = tweets[i];
-        let words = tweet.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
-        if(words.some(r=> ['gun', 'guns', 'nra'].indexOf(r) >= 0)){
-          this.filteredTweets.push({ text: tweet.text, created_at: tweet.created_at });
-        }
+      return tweets.map(value => {
+        return { text: value.text, created_at: value.created_at };
+      }).filter(value => {
+        let words = value.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
+        return words.some(r=> this.searchTerms.indexOf(r) >= 0);
       }
+      );
     }
   }
 };
