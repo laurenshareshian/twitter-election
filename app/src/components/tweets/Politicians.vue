@@ -1,23 +1,23 @@
 <template>
     <div class="politicians">
-        <div v-if="state">
-            <h3>Your {{state}} race is: </h3>
-            <p> {{pol1}} </p>
-            <p> vs. </p>
-            <p> {{pol2}} </p>
-        </div>
+      <div v-if="state">
+          <h3>Your {{state}} race is: </h3>
+          <p> {{pol1}} </p>
+          <p> vs. </p>
+          <p> {{pol2}} </p>
+      </div>
     </div>
 
 </template>
 
 <script>
+
 export default {
   props: {
     state: String,
     pol1: String,
     pol2: String
-  },
-
+  }
 };
 </script>
 <style scoped>

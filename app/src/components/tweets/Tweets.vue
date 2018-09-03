@@ -16,12 +16,11 @@
                      :search-terms="searchTerms">
                      </FilteredResults>
     <Loading :loading="loading"> </Loading>
-  </div>
+   </div> 
 </section>
 </template>
 
 <script>
-
 import ChoicesForm from './ChoicesForm.vue';
 import Politicians from './Politicians.vue';
 import Loading from './Loading.vue';

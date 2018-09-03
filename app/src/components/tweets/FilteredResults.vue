@@ -23,7 +23,7 @@ export default {
   methods: {
     filterTweets(tweets) {
       return tweets.map(value => {
-        return { text: value.text, created_at: value.created_at };
+        return { text: value.text, created_at: value.created_at, idStr: value.id_str };
       }).filter(value => {
         let words = value.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
         return words.some(r=> this.searchTerms.indexOf(r) >= 0);

@@ -1,15 +1,18 @@
 <template id="tweet-template">
-<div class="tweet">
-  <a v-bind:href="url">
-    <p>{{tweet['created_at'].substring(4,10)}}: {{handleUrl()}}</p>
-  </a>
+  <div class="tweet">
+    <Tweet :id="tweet.idStr" :options="{ cards: 'hidden' }"></Tweet>
   </div>
 </template>
 
 <script>
+import Tweet from 'vue-tweet-embed/tweet';
+
 export default {
   props: {
     tweet: Object
+  },
+  components: {
+    Tweet
   },
   data() {
     return {
@@ -36,8 +39,8 @@ h3 {
   margin: 40px 0 0;
 }
 .tweet {
-  border: 2px black solid;
   margin: 40px;
+  width: 500px;
 }
 
 a {
