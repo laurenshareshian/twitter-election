@@ -4,9 +4,8 @@
       <div class="flex-box">
         <div class="flex-one">
           <label>
-            Choose a state election<br>
-            <select v-model="choice.state" required>
-              <option disabled value="">Please select a state</option>
+            <select v-model="choice.state" class="soflow-color" required>
+              <option disabled value="">Select a state</option>
               <option
                 v-for="state in states"
                 :key="state.id"
@@ -19,9 +18,8 @@
         </div>
         <div class="flex-two">
           <label>
-            Choose an issue <br>
-            <select v-model="choice.issue" required>
-            <option disabled value="">Please select an issue</option>
+            <select v-model="choice.issue" class="soflow-color" required>
+            <option disabled value="">Select an issue</option>
             <option
                 v-for="issue in issues"
                 :key="issue.id"
@@ -33,7 +31,7 @@
           </label>
         </div>
         <div class="button-container">
-          <button type="submit">Search</button>
+          <button class="soflow-color" type="submit">Search</button>
         </div>
       </div>
     </form>
@@ -79,26 +77,59 @@ p {
   text-transform: uppercase;
 }
 button {
-    background: #fa504d;
-    border: none;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 5px;
-    padding: 10px;
-    font-weight: 600;
-    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
-    transition: all .2s ease-in-out;
+   -webkit-appearance: button;
+   -webkit-padding-end: 20px;
+   -webkit-padding-start: 2px;
+   border: 1px solid #AAA;
+   font-size: inherit;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   width: 100px;
+
+  background: #fa504d;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  padding: 10px;
+  font-weight: 600;
+  box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+  transition: all .2s ease-in-out;
 }
 button:hover {
     transform: scale(1.1); 
 }
-
-/* .button-container {
-  margin-top: 50px;
-  text-align:center;
-} */
 .flex-box{
   display:flex;
+}
+.soflow-color {
+  -webkit-appearance: button;
+  -webkit-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  border: 1px solid #AAA;
+  font-size: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+
+  background: #fa504d;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  padding: 10px;
+  font-weight: 600;
+  box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+  transition: all .2s ease-in-out;
+
+}
+
+button.soflow-color {
+  border-radius: 5px;
+  width: 100px;
 }
 </style>

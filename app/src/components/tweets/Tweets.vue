@@ -114,4 +114,8 @@ ul.list {
 .filtered-results {
   display: flex;
 }
+
+section {
+  padding-bottom: 500px;
+}
 </style>
