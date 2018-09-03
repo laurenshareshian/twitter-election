@@ -11,11 +11,11 @@
                      :tweets="tweets1"
                      :search-terms="searchTerms">
                      </FilteredResults>
-    <FilteredResults :screen-name="screenName2"
+    <!-- <FilteredResults :screen-name="screenName2"
                      :tweets="tweets2"
                      :search-terms="searchTerms">
                      </FilteredResults>
-    <Loading :loading="loading"> </Loading>
+    <Loading :loading="loading"> </Loading> -->
   </div>
 </section>
 </template>
@@ -41,8 +41,8 @@ export default {
       pol2: null, // politician 2 of state election
       screenName1: null, // screenname 1 of state election
       screenName2: null, // screenname 2 of state election
-      tweets1: [], // tweets of politician 1
-      tweets2: [], // tweets of politician 2
+      tweets1: [],
+      tweets2: [],
       loading: false
 
     };
@@ -65,14 +65,8 @@ export default {
   },
   methods: {
     handleAdd(choice) {
-      this.loading = true;
       this.stateChoiceId = choice.state;
       this.issueChoiceId = choice.issue;
-      api.getIssueById(this.issueChoiceId)
-        .then(issue => {
-          this.issue = issue;
-          this.searchTerms = this.issue.searchterms;
-        });
       api.getStateById(this.stateChoiceId)
         .then(state => {
           this.state = state.name;
@@ -81,19 +75,39 @@ export default {
           this.pol2 = state.pol2;
           this.screenName1 = state.twitter1;
           this.screenName2 = state.twitter2;
-        })
-        .then(() => {
-          api.getTweets({ screenName: this.screenName1 })
-            .then(tweets => {
-              this.tweets1 = tweets;
-            });
-          api.getTweets({ screenName: this.screenName2 })
-            .then(tweets => {
-              this.tweets2 = tweets;
-              this.loading = false;
-            });
+        });
+      api.getIssueById(this.issueChoiceId)
+        .then(issue => {
+          this.issue = issue;
+          this.searchTerms = this.issue.searchterms;
+        });
+      // this.findPoliticians();
+      // this.findScreenName();
+      // this.findIssues();
+      this.loading = true;
+      api.getTweets({ screenName: this.screenName1 })
+        .then(tweets => {
+          this.tweets1 = tweets;
+          console.log('tweets length', this.tweets1);
+        });
+      api.getTweets({ screenName: this.screenName2 })
+        .then(tweets => {
+          this.tweets2 = tweets;
+          this.loading = false;
         });
       return choice;
+    }, 
+    findPoliticians(){
+      this.state = this.states[this.stateChoiceId - 1].name;
+      this.pol1 = this.states[this.stateChoiceId - 1].pol1;
+      this.pol2 = this.states[this.stateChoiceId - 1].pol2;
+    },
+    findScreenName() {
+      this.screenName1 = this.states[this.stateChoiceId - 1].twitter1;
+      this.screenName2 = this.states[this.stateChoiceId - 1].twitter2;
+    },
+    findIssues() {
+      this.searchTerms = this.issues[this.issueChoiceId - 1].searchterms;
     }
   }
 };

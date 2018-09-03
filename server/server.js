@@ -160,6 +160,47 @@ app.get('/api/issues', (req, res) => {
     });
 });
 
+app.get('/api/states/:id', (req, res) => {
+  client.query(`
+    SELECT 
+      id,
+      name, 
+      pol1, 
+      pol2, 
+      twitter1, 
+      twitter2
+    FROM states
+    WHERE id = $1;
+  `,
+  [req.params.id]
+  )
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
+  
+});
+
+app.get('/api/issues/:id', (req, res) => {
+  console.log('in issue by id');
+  client.query(`
+    SELECT 
+      id,
+      name, 
+      searchterms
+    FROM issues
+    WHERE id = $1;
+  `,
+  [req.params.id]
+  )
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
+  
+});
+
+
 /* RUN THE SERVER */
 
 // set the PORT on which to listen

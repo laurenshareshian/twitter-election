@@ -26,5 +26,17 @@ export default {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(response => response.json());
-  }
+  },
+  getStateById(id) {
+    return fetch(`http://localhost:3000/api/states/${id}`, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(response => response.json());
+  },
+  getIssueById(id) {
+    return fetch(`http://localhost:3000/api/issues/${id}`, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(response => response.json());
+  },
 };
