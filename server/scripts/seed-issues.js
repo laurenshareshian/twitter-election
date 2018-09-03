@@ -6,10 +6,10 @@ const issues = require('./issues.json');
 Promise.all(
   issues.map(issue => {
     return client.query(`
-        INSERT INTO issues (name, searchTerms)
+        INSERT INTO issues (name, searchterms)
         VALUES ($1, $2);
     `,
-    [issue.name, issue.searchTerms]
+    [issue.name, issue.searchterms]
     );
   })
 )

@@ -74,7 +74,6 @@ app.post('/api/tweets', (req, res) => {
           return fetchTweets(--callsToMake, params, allTweets);
         } else {
           console.log('im resolved');
-          //i moved these lines here:
           fs.writeFileSync(dataPath, JSON.stringify(tweets));
           res.send(tweets);
           // return resolve(allTweets);
@@ -84,13 +83,9 @@ app.post('/api/tweets', (req, res) => {
   }
 
   fetchTweets(2, params);
-  // .then((tweets) => {
-  //   console.log('length', tweets.length);
-  //   fs.writeFileSync(dataPath, JSON.stringify(tweets));
-  //   res.send(tweets);
-  // });
 
 
+// old way to get tweets without using recursion
   // twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
   //   [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
   //   if(old_max_id !== max_id) {

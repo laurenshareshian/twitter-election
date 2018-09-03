@@ -54,7 +54,6 @@ export default {
   methods: {
     handleSubmit() {
       this.onAdd(this.tweet)
-        // this fires when save is complete and data added to nieghborhoods array
         .then(() => {
           this.tweet = initTweet();
         });

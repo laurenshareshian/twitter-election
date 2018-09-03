@@ -4,7 +4,7 @@ client.query(`
     CREATE TABLE IF NOT EXISTS issues (
       id SERIAL PRIMARY KEY,
       name VARCHAR(256) NOT NULL,
-      searchTerms VARCHAR(256) ARRAY[10]
+      searchterms VARCHAR(256) ARRAY[10]
     );
     CREATE TABLE IF NOT EXISTS states (
       id SERIAL PRIMARY KEY,

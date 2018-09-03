@@ -69,4 +69,10 @@ a {
   padding:5px;
   color: white;
 }
+
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 1080px) {
+        button {margin-bottom: 400px;}
+    }
+}
 </style>

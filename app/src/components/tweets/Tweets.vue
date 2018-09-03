@@ -1,6 +1,8 @@
 <template>
 <section>
-  <ChoicesForm :on-add="handleAdd"> </ChoicesForm>
+  <ChoicesForm :states="states"
+               :issues="issues"
+               :on-add="handleAdd"> </ChoicesForm>
   <Politicians :state="state"
               :pol1="pol1"
               :pol2="pol2"></Politicians>
@@ -29,17 +31,18 @@ import api from '../../services/api';
 export default {
   data() {
     return { 
-      stateChoice: null,
-      issueChoice: null,
-      issues: [],
-      state: null,
-      pol1: null,
-      pol2: null,
-      screenName1: null,
-      screenName2: null,
+      states: [], // all state election options
+      issues: [], // all issue options
+      searchTerms: [], // search terms for the chosen issue
+      stateChoice: null, // index of user's state election choice
+      issueChoice: null, // index of user's issue choice
+      state: null, // user's state choice
+      pol1: null, // politician 1 of state election
+      pol2: null, // politician 2 of state election
+      screenName1: null, // screenname 1 of state election
+      screenName2: null, // screenname 2 of state election
       tweets1: [],
       tweets2: [],
-      searchTerms: [],
       loading: false
 
     };
