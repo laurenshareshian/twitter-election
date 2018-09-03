@@ -71,14 +71,12 @@ export default {
       api.getTweets({ screenName: this.screenName1 })
         .then(tweets => {
           this.tweets1 = tweets;
-        }).then(() => {
-          api.getTweets({ screenName: this.screenName2 })
-            .then(tweets => {
-              this.tweets2 = tweets;
-              this.loading = false;
-            });
         });
-     
+      api.getTweets({ screenName: this.screenName2 })
+        .then(tweets => {
+          this.tweets2 = tweets;
+          this.loading = false;
+        });
       return choice;
     }, 
     findPoliticians(){

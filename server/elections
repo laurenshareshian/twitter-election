@@ -78,3 +78,39 @@ Wisconsin:
 Incumbent Democrat Tammy Baldwin vs. Republican Leah Vukmir
 @tammybaldwin
 @LeahVukmir
+
+
+app.post('/api/tweets', (req, res) => {
+  const body = req.body;
+  let screen_name = body.screenName;
+  console.log(body);
+  var params = { screen_name: screen_name, count: 200 };
+  var data = [];
+  var max_id = 0;
+  var old_max_id = 0;
+  twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+    [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+    if(old_max_id !== max_id) {
+      twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+        [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+        if(old_max_id !== max_id){
+          twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+            [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+            if(old_max_id !== max_id){
+              twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+                [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+                if(old_max_id !== max_id){
+                  twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+                    [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+                    fs.writeFileSync(dataPath, JSON.stringify(data));
+                    res.send(data);
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  });
+});

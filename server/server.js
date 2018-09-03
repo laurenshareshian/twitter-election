@@ -63,31 +63,59 @@ app.post('/api/tweets', (req, res) => {
   var data = [];
   var max_id = 0;
   var old_max_id = 0;
-  twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
-    [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
-    if(old_max_id !== max_id) {
+
+  function fetchTweets(callsToMake = 3, params = {}, allTweets = []) { 
+    return new Promise(() => {
       twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
         [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
-        if(old_max_id !== max_id){
-          twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
-            [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
-            if(old_max_id !== max_id){
-              twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
-                [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
-                if(old_max_id !== max_id){
-                  twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
-                    [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
-                    fs.writeFileSync(dataPath, JSON.stringify(data));
-                    res.send(data);
-                  });
-                }
-              });
-            }
-          });
+        allTweets = allTweets.concat(tweets);
+        console.log(callsToMake, old_max_id, max_id);
+        if(callsToMake > 1 && old_max_id !== max_id) {
+          return fetchTweets(--callsToMake, params, allTweets);
+        } else {
+          console.log('im resolved');
+          //i moved these lines here:
+          fs.writeFileSync(dataPath, JSON.stringify(tweets));
+          res.send(tweets);
+          // return resolve(allTweets);
         }
       });
-    }
-  });
+    });
+  }
+
+  fetchTweets(2, params);
+  // .then((tweets) => {
+  //   console.log('length', tweets.length);
+  //   fs.writeFileSync(dataPath, JSON.stringify(tweets));
+  //   res.send(tweets);
+  // });
+
+
+  // twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+  //   [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+  //   if(old_max_id !== max_id) {
+  //     twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+  //       [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+  //       if(old_max_id !== max_id){
+  //         twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+  //           [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+  //           if(old_max_id !== max_id){
+  //             twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+  //               [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+  //               if(old_max_id !== max_id){
+  //                 twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+  //                   [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
+  //                   fs.writeFileSync(dataPath, JSON.stringify(data));
+  //                   res.send(data);
+  //                 });
+  //               }
+  //             });
+  //           }
+  //         });
+  //       }
+  //     });
+  //   }
+  // });
 });
 
 // read directly from json, not directly from twitter

@@ -21,17 +21,6 @@ export default {
     Tweet
   },
   methods: {
-    // filterTweets(tweets) {
-    //   let filteredTweets = [];
-    //   for(let i = 0; i < tweets.length; i++){
-    //     let tweet = tweets[i];
-    //     let words = tweet.text.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, '').split(' ');
-    //     if(words.some(r=> this.searchTerms.indexOf(r) >= 0)){
-    //       filteredTweets.push({ text: tweet.text, created_at: tweet.created_at });
-    //     }
-    //   }
-    //   return filteredTweets;
-    // }
     filterTweets(tweets) {
       return tweets.map(value => {
         return { text: value.text, created_at: value.created_at };
@@ -46,7 +35,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .add-tweet {
   width: 300px;
   text-align: left;
@@ -54,5 +43,9 @@ export default {
 }
 label {
   display: block;
+}
+
+h3 {
+  text-align: center;
 }
 </style>
