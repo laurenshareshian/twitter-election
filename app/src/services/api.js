@@ -39,4 +39,12 @@ export default {
     })
       .then(response => response.json());
   },
+  addIssue(issue) {
+    return fetch('http://localhost:3000/api/issues', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(issue)
+    })
+      .then(response => response.json());
+  },
 };

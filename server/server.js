@@ -199,6 +199,24 @@ app.get('/api/issues/:id', (req, res) => {
   
 });
 
+app.post('/api/issues', (req, res) => {
+  console.log('posting');
+  const body = req.body;
+  console.log(body);
+  client.query(`
+    INSERT INTO issues (name, searchterms)
+    VALUES ($1, $2)
+    RETURNING *;
+  `,
+  [body.name, body.searchTerms]
+  )
+    .then(result => {
+      // we always get rows back, in this case we just want first one.
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
+});
+
 
 /* RUN THE SERVER */
 

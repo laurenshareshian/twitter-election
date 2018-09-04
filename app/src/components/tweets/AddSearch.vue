@@ -1,26 +1,21 @@
 <template id="tweet-template">
   <section class="add-tweet">
-    <h1>New Tweet</h1>
+    <h3>Personalized Issue Search</h3>
     <form @submit.prevent="handleSubmit">
       <label>
-       Created at:
-        <input type="text" name="created-at" placeholder="Created at" required
-          v-model="tweet.created_at">
+       Search label (Ex: Gun Control)
+        <input type="text" name="name" placeholder="Search Label" required
+          v-model="issue.name">
       </label>
       <label>
-       Id:
-        <input type="text" name="id" placeholder="Id" required
-          v-model="tweet.id">
+       Search term 1 (Ex: gun)
+        <input type="text" name="search1" placeholder="Search Term 1" required
+          v-model="search1">
       </label>
-            <label>
-       Text:
-        <input type="text" name="text" placeholder="Text" required
-          v-model="tweet.text">
-      </label>
-            <label>
-       Retweet Count:
-        <input type="text" name="retweet-count" placeholder="Retweet count" required
-          v-model="tweet.retweet_count">
+      <label>
+       Search term 2 (Ex: nra)
+        <input type="text" name="search2" placeholder="Search Term 2" required
+          v-model="search2">
       </label>
       <label>
         <button type="submit">Add</button>
@@ -30,39 +25,43 @@
 </template>
 
 <script>
-const initTweet = () => {
-  return {
-    created_at: '', 
-    id: '',
-    text: '',
-    retweet_count: '',
 
+import api from '../../services/api';
+
+const initIssue = () => {
+  return {
+    name: '', 
+    searchTerms: [],
   };
 };
 export default {
   props: {
     onAdd: {
-      type: Function,
-      required: true
+      type: Function
     }
   },
   data() {
     return {
-      tweet: initTweet()
+      issue: initIssue(),
+      search1: '',
+      search2: ''
     };
   },
   methods: {
     handleSubmit() {
-      this.onAdd(this.tweet)
+      this.issue.searchTerms.push(this.search1);
+      this.issue.searchTerms.push(this.search2);
+      console.log(this.issue);
+      api.addIssue(this.issue)
         .then(() => {
-          this.tweet = initTweet();
-        });
+          this.$router.push('/tweets');}
+        );
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .add-tweet {
   width: 300px;
   text-align: left;
@@ -70,5 +69,30 @@ export default {
 }
 label {
   display: block;
+  margin: 20px;
 }
+form {
+  background: white;
+  padding: 30px;
+  box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+}
+p {
+  text-align: center;
+  text-transform: uppercase;
+}
+button {
+    background: #fa504d;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 20px;
+    font-weight: 600;
+    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+    transition: all .2s ease-in-out;
+}
+button:hover {
+    transform: scale(1.1); 
+}
+
 </style>

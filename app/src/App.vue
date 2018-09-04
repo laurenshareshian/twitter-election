@@ -2,7 +2,8 @@
   <div class="app">
     <header>
       <router-link to="/">Home</router-link>
-      <router-link to="/tweets">Tweets</router-link>
+      <router-link to="/tweets">Tweet Search</router-link>
+      <router-link to="/add">Add Search </router-link>
     </header>
 
     <router-view></router-view>
