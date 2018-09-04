@@ -1,21 +1,22 @@
 <template id="filter">
     <div v-if="tweets.length">
-      <div v-if="this.filterTweets(tweets).length>0">
-        <h3> @{{screenName}}</h3>
+        <div v-if="this.filterTweets(tweets) > 0">
+        <h3> @{{screenName}} </h3>
         <Tweet v-for="(tweet, index) in this.filterTweets(tweets)"
         :key="index"
         :tweet="tweet">
         </Tweet>
-        </div>
-        <div class="no-results" v-else>
-          <h3> @{{screenName}}</h3>
-          No results
-        </div>
+      </div>
+      <div class="no-results" v-else>
+        <h3> @{{screenName}} </h3>
+        No results
+      </div>
     </div>
 </template>
 
 <script>
 import Tweet from './Tweet';
+
 export default {
   props: {
     screenName: String,
@@ -37,6 +38,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style scoped>
@@ -48,6 +50,7 @@ export default {
 label {
   display: block;
 }
+
 h3 {
   text-align: center;
 }

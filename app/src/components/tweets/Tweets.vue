@@ -67,6 +67,8 @@ export default {
       this.loading = true;
       this.stateChoiceId = choice.state;
       this.issueChoiceId = choice.issue;
+      this.tweets1 = [];
+      this.tweets2 = [];
       api.getIssueById(this.issueChoiceId)
         .then(issue => {
           this.issue = issue;
@@ -85,6 +87,7 @@ export default {
           api.getTweets({ screenName: this.screenName1 })
             .then(tweets => {
               this.tweets1 = tweets;
+              console.log(this.tweets1[0]);
             });
           api.getTweets({ screenName: this.screenName2 })
             .then(tweets => {

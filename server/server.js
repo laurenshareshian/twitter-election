@@ -69,7 +69,6 @@ app.post('/api/tweets', (req, res) => {
       twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
         [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
         allTweets = allTweets.concat(tweets);
-        console.log(callsToMake, old_max_id, max_id);
         if(callsToMake > 1 && old_max_id !== max_id) {
           return fetchTweets(--callsToMake, params, allTweets);
         } else {
