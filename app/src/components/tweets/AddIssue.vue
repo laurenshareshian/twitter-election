@@ -7,15 +7,21 @@
         <input type="text" name="name" placeholder="Search Label" required
           v-model="issue.name">
       </label>
+      <p> Enter up to three search terms. </p>
       <label>
        Search term 1 (Ex: gun)
         <input type="text" name="search1" placeholder="Search Term 1" required
           v-model="search1">
       </label>
       <label>
-       Search term 2 (Ex: nra)
-        <input type="text" name="search2" placeholder="Search Term 2" required
+       Search term 2 (Ex: guns)
+        <input type="text" name="search2" placeholder="Search Term 2"
           v-model="search2">
+      </label>
+      <label>
+      Search term 3 (Ex: nra)
+      <input type="text" name="search3" placeholder="Search Term 3"
+          v-model="search3">
       </label>
       <label>
         <button type="submit">Add</button>
@@ -26,7 +32,7 @@
 
 <script>
 
-import api from '../../services/api';
+import { addIssue } from '../../services/api';
 
 const initIssue = () => {
   return {
@@ -50,9 +56,14 @@ export default {
   methods: {
     handleSubmit() {
       this.issue.searchTerms.push(this.search1);
-      this.issue.searchTerms.push(this.search2);
+      if(this.search2){
+        this.issue.searchTerms.push(this.search2);
+      }
+      if(this.search3){
+        this.issue.searchTerms.push(this.search3);
+      }
       console.log(this.issue);
-      api.addIssue(this.issue)
+      addIssue(this.issue)
         .then(() => {
           this.$router.push('/tweets');}
         );
@@ -62,8 +73,11 @@ export default {
 </script>
 
 <style scoped>
+section {
+  font-family: 'Open Sans';
+}
 .add-tweet {
-  width: 300px;
+  width: 500px;
   text-align: left;
   margin: auto;
 }

@@ -1,17 +1,17 @@
-
+require('dotenv').config();
 require('dotenv').config();
 const client = require('../db-client');
-// okay to import "json", you will get JavaScript objects :)
-const issues = require('./issues.json');
+const users = require('./users.json');
+// const neighborhoods = require('./neighborhoods.json');
 
 Promise.all(
-  issues.map(issue => {
+  users.map(user => {
     return client.query(`
-        INSERT INTO issues (name, searchterms)
+        INSERT INTO users (email, password)
         VALUES ($1, $2);
     `,
-    [issue.name, issue.searchterms]
-    );
+    [user.email, user.password]
+    ).then(result => result.rows[0]);
   })
 )
   .then(

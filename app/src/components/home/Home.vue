@@ -3,8 +3,8 @@
     <div class="welcome">
 
       <h1>Midterm Elections 2018</h1>
-      <router-link to="/tweets">
-      <button> Explore the issues </button>
+      <router-link to="/auth">
+      <button> Sign in </button>
       </router-link>
     </div>
 

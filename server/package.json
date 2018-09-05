@@ -12,7 +12,8 @@
     "recreate-tables": "npm run drop-tables && npm run create-tables",
     "seed-states": "node scripts/seed-states.js",
     "seed-issues": "node scripts/seed-issues.js",
-    "seed-data": "npm run seed-issues && npm run seed-states",
+    "seed-users": "node scripts/seed-users.js",
+    "seed-data": "npm run seed-issues && npm run seed-states && npm run seed-users",
     "db-load-all": "npm run recreate-tables && npm run seed-data"
   },
   "author": "Lauren Shareshian",
@@ -20,10 +21,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "i": "^0.3.6",
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
+    "superagent": "^3.8.3",
     "twit": "^2.2.11"
   },
   "devDependencies": {

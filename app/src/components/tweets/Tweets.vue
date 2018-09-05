@@ -25,7 +25,7 @@ import ChoicesForm from './ChoicesForm.vue';
 import Politicians from './Politicians.vue';
 import Loading from './Loading.vue';
 import FilteredResults from './FilteredResults.vue';
-import api from '../../services/api';
+import { getIssueById, getStateById, getTweets, getIssues, getStates } from '../../services/api';
 
 export default {
   data() {
@@ -47,11 +47,11 @@ export default {
     };
   },
   created() {
-    api.getStates()
+    getStates()
       .then(states => {
         this.states = states;
       });
-    api.getIssues()
+    getIssues()
       .then(issues => {
         this.issues = issues;
       });
@@ -60,7 +60,7 @@ export default {
     ChoicesForm,
     Politicians,
     FilteredResults,
-    Loading
+    Loading,
   },
   methods: {
     handleAdd(choice) {
@@ -69,12 +69,12 @@ export default {
       this.issueChoiceId = choice.issue;
       this.tweets1 = [];
       this.tweets2 = [];
-      api.getIssueById(this.issueChoiceId)
+      getIssueById(this.issueChoiceId)
         .then(issue => {
           this.issue = issue;
           this.searchTerms = this.issue.searchterms;
         });
-      api.getStateById(this.stateChoiceId)
+      getStateById(this.stateChoiceId)
         .then(state => {
           this.state = state.name;
           this.name = state.name;
@@ -84,12 +84,12 @@ export default {
           this.screenName2 = state.twitter2;
         })
         .then(() => {
-          api.getTweets({ screenName: this.screenName1 })
+          getTweets({ screenName: this.screenName1 })
             .then(tweets => {
               this.tweets1 = tweets;
               console.log(this.tweets1[0]);
             });
-          api.getTweets({ screenName: this.screenName2 })
+          getTweets({ screenName: this.screenName2 })
             .then(tweets => {
               this.tweets2 = tweets;
               this.loading = false;

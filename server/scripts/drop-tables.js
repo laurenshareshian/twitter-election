@@ -1,4 +1,5 @@
 const client = require('../db-client');
+require('dotenv').config();
 
 client.query(`
     DROP TABLE IF EXISTS states;
