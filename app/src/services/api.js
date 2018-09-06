@@ -102,7 +102,6 @@ export function deleteIssue(id) {
 }
 
 export function getIssueById(id) {
-  console.log('id', id);
   return fetch(`/api/issues/${id}`, 
     {
       headers: getHeaders()

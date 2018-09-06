@@ -3,7 +3,7 @@
       <section v-if="issue">
         <h2> {{issue.name}} </h2>
         <p class="issue__text">{{ issue.description}}</p>
-        <div class="issue" v-for="(searchterm, i) in issue.searchterms" :key="i">
+        <div class="issue" v-for="(searchterm, i) in issue.searchTerms" :key="i">
             <p> {{searchterm}} </p>
         </div>
 

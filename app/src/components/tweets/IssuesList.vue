@@ -2,10 +2,9 @@
   <ul id="issues-app">
     <li class="issue" v-for="issue in issues" :key="issue.id">
     <router-link :to="`/issues/${issue.id}`">
-      <!-- <button @click="handle(i)" class="issue__checkbox" ></button> -->
       <h3> {{issue.name}} </h3>
       <p class="issue__text">{{ issue.description}}</p>
-      <div class="issue" v-for="searchterm in issue.searchterms" :key="searchterm">
+      <div class="issue" v-for="searchterm in issue.searchTerms" :key="searchterm">
           <p> {{searchterm}} </p>
       </div>
     </router-link>
@@ -15,18 +14,11 @@
 
 </template>
 
-
-
 <script>
-// import { updateIssue } from '../../services/api';
+
 export default {
   props: {    
     issues: Array
-  },
-  methods: {
-    handleUpdate() {
-      console.log('hi');
-    }
   }
 };
 </script>
@@ -34,22 +26,6 @@ export default {
 
 
 <style scoped>
-
-/* body {
-    font-family: 'Open Sans';
-}
-
-h3 {
-    font-family: 'Open Sans';
-}
-#issues-app {
-  align-items: center;
-  display: grid;
-  grid-auto-flow: row;
-  justify-items: center;
-  margin-top: 30px;
-  padding-bottom: 200px;
-} */
 
 h3{
   font-family:'Playfair Display';

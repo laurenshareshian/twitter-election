@@ -34,10 +34,8 @@ export default new VueRouter({
       children: [
         { path: 'list', component: IssuesList },
         { path: 'new', component: AddIssue },
-        // { path: 'edit', component: UpdateIssue },
-        { path: ':id', component: IssueDetail,
-          children: [{ path: 'edit', component: UpdateIssue }]
-        },
+        { path: ':id', component: IssueDetail },
+        { path: ':id/edit', component: UpdateIssue },
         { path: '', redirect: 'list' }
       ]
     },

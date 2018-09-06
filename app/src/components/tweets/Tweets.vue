@@ -72,7 +72,7 @@ export default {
       getIssueById(this.issueChoiceId)
         .then(issue => {
           this.issue = issue;
-          this.searchTerms = this.issue.searchterms;
+          this.searchTerms = this.issue.searchTerms;
         });
       getStateById(this.stateChoiceId)
         .then(state => {

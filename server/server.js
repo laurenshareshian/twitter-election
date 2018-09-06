@@ -168,7 +168,10 @@ function handleTweets(error, max_id, tweets, data, screen_name) {
 
 app.get('/api/issues', (req, res) => {
   client.query(`
-    SELECT *
+    SELECT
+      id,
+      name,
+      searchterms as "searchTerms"
     FROM issues;
   `)
     .then(result => {
@@ -180,8 +183,8 @@ app.get('/api/issues/:id', (req, res) => {
   client.query(`
     SELECT 
       id,
-      name, 
-      searchterms
+      name,
+      searchterms as "searchTerms"
     FROM issues
     WHERE id = $1;
   `,

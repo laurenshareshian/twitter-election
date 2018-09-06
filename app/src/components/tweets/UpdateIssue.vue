@@ -1,46 +1,42 @@
 <template>
-  <div v-if="issue">
-    Hi
-  <IssueForm v-if="issue"
-    :issue="issue"
-  />
-  </div>
+  <section>
+    <h2>Edit issue</h2>
+    <IssueForm 
+      label="Edit"
+      :issue="issue"
+      :onEdit="handleEdit"/>
+  </section>
 </template>
 
 <script>
 import IssueForm from './IssueForm.vue';
 import { getIssueById, updateIssue } from '../../services/api';
 export default {
-  components: {
-    IssueForm
+  components: { 
+    IssueForm 
   },
   data() {
     return {
-      issue: null
+      issue: null,
     };
   },
   created() {
-    getIssueById(this.$route.params.key)
+    getIssueById(this.$route.params.id)
       .then(issue => {
         this.issue = issue;
-        console.log('issue', this.issue);
       });
   },
-
   methods: {
-    handleUpdate(issue) {
+    handleEdit(issue) {
       updateIssue(issue)
-        .then(() => {
-          this.backToDetail();
+        .then(added => {
+          this.$router.push(`/issues/${added.id}`);
         });
-
-    },
-    backToDetail() {
-      this.$router.push(`/issues/${this.issue.id}`);
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+h2 {text-align: center;}
 </style>

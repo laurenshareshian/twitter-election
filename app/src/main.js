@@ -15,7 +15,3 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app');
-
-// fetch('/api/restaurants')
-//   .then(response => response.json())
-//   .then(console.log);
