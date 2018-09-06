@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import IssueForm from './IssueForm.vue';
+import UpdateIssueForm from './UpdateIssueForm.vue';
 import { getIssueById, updateIssue } from '../../services/api';
 export default {
   components: { 
-    IssueForm 
+    UpdateIssueForm 
   },
   data() {
     return {

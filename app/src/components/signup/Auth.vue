@@ -1,7 +1,6 @@
 <template>
   <section class="signup-form">
     <div>
-    <h2>{{ label }}</h2>
     <button class="signup-button" @click="type = isSignUp ? 'signIn' : 'signUp'">
       {{
         isSignUp
@@ -22,12 +21,12 @@
           :type="show ? 'text' : 'password'"
           autocomplete="current-password" 
           v-model="credentials.password">
-        <button class='password-button'
+        <!-- <button class='password-button'
           @click="show = !show"
           type="button"
         >
           {{ show ? 'Hide Password' : 'Show Password' }}
-        </button>
+        </button> -->
       </FormControl>
       <FormControl>
         <button class='submit-button' type="submit">
@@ -94,7 +93,7 @@ export default {
 
 <style scoped>
 .signup-form {
-  width: 300px;
+  width: 500px;
   text-align: left;
   font-family: 'Open Sans';
   padding-top: 50px;
@@ -136,6 +135,20 @@ input {
     transition: all .2s ease-in-out;
     margin-bottom: 20px;
 }
+
+.password-button {
+    background: #fa504d;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px;
+    font-weight: 600;
+    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
+    transition: all .2s ease-in-out;
+    margin-bottom: 20px;
+}
+
 button:hover {
     transform: scale(1.1); 
 } 

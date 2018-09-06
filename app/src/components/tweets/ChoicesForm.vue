@@ -103,6 +103,7 @@ button:hover {
 }
 .flex-box{
   display:flex;
+  align-items: center;
 }
 .soflow-color {
   -webkit-appearance: button;

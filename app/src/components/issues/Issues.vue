@@ -54,10 +54,11 @@ export default {
 
 <style scoped>
 .tiles {
+
   padding-top: 50px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 pre {
   text-align: left;
@@ -65,6 +66,9 @@ pre {
 
 .router-link-exact-active {
   margin: none !important;
+}
+a {
+  margin: 50px;
 }
 
 </style>

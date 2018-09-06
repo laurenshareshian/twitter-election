@@ -1,5 +1,5 @@
 <template id="tweet-template">
-  <section class="add-tweet">
+  <section class="add-issue">
     <h3>Personalized Issue Search</h3>
     <form @submit.prevent="handleSubmit">
       <label>
@@ -72,7 +72,7 @@ export default {
 section {
   font-family: 'Open Sans';
 }
-.add-tweet {
+.add-issue {
   width: 500px;
   text-align: left;
   margin: auto;
@@ -104,5 +104,7 @@ button {
 button:hover {
     transform: scale(1.1); 
 }
+
+h3 {text-align: center;}
 
 </style>

@@ -53,7 +53,7 @@ button {
     font-weight: 600;
     box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
     transition: all .2s ease-in-out;
-    margin-bottom:180px;
+    margin-bottom:300px;
 }
 button:hover {
     transform: scale(1.1); 

@@ -15,14 +15,14 @@
 
 import VueRouter from 'vue-router';
 import Home from './components/home/Home.vue';
-import Auth from './components/tweets/Auth.vue';
+import Auth from './components/signup/Auth.vue';
 import Tweets from './components/tweets/Tweets.vue';
 
-import Issues from './components/tweets/Issues.vue';
-import IssuesList from './components/tweets/IssuesList.vue';
-import AddIssue from './components/tweets/AddIssue.vue';
-import UpdateIssue from './components/tweets/UpdateIssue.vue';
-import IssueDetail from './components/tweets/IssueDetail.vue';
+import Issues from './components/issues/Issues.vue';
+import IssuesList from './components/issues/IssuesList.vue';
+import AddIssue from './components/issues/AddIssue.vue';
+import UpdateIssue from './components/issues/UpdateIssue.vue';
+import IssueDetail from './components/issues/IssueDetail.vue';
 
 export default new VueRouter({
   routes: [

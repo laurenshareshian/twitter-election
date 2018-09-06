@@ -20,7 +20,6 @@
 
 <script>
 import { deleteIssue, getIssueById } from '../../services/api';
-import Loading from './Loading';
 export default {
   props: {
     onRemove: {
@@ -37,9 +36,6 @@ export default {
       .then(issue => {
         this.issue = issue;
       });
-  },
-  components: {
-    Loading
   },
   methods: {
     handleDelete() {

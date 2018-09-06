@@ -136,7 +136,7 @@ app.post('/api/tweets', (req, res) => {
         } else {
           console.log('im resolved', response);
           res.send(tweets);
-          // return resolve(allTweets);
+          // return resolve(allTweets); //why isnt this working?
         }
       });
     });
