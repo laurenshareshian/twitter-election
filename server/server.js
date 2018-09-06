@@ -193,10 +193,9 @@ app.get('/api/userissues/:id', (req, res) => {
       name,
       searchterms as "searchTerms"
     FROM userissues
-    WHERE id = $1
-    AND user_id=$2;
+    WHERE id = $1;
   `,
-  [req.params.id, req.userId]
+  [req.params.id]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -233,6 +232,7 @@ app.put('/api/userissues', (req, res) => {
         searchterms = $3,
         user_id = $4
     WHERE id = $1
+    AND user_id = $4
     RETURNING *, user_id as "userId";
   `,
   [body.id, body.name, body.searchTerms, req.userId]
@@ -249,9 +249,10 @@ app.delete('/api/userissues/:id', (req, res) => {
   client.query(`
     DELETE FROM userissues
     WHERE id = $1
+    AND user_id = $2
     RETURNING *;
   `,
-  [req.params.id]
+  [req.params.id, req.userId]
   )
     .then(result => {
       res.send(result.rows[0]);

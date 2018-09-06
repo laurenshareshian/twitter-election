@@ -25,7 +25,7 @@ import ChoicesForm from './ChoicesForm.vue';
 import Politicians from './Politicians.vue';
 import Loading from './Loading.vue';
 import FilteredResults from './FilteredResults.vue';
-import { getIssueById, getStateById, getTweets, getIssues, getStates } from '../../services/api';
+import { getUserIssueById, getStateById, getTweets, getUserIssues, getStates } from '../../services/api';
 
 export default {
   data() {
@@ -51,7 +51,7 @@ export default {
       .then(states => {
         this.states = states;
       });
-    getIssues()
+    getUserIssues()
       .then(issues => {
         this.issues = issues;
       });
@@ -69,8 +69,9 @@ export default {
       this.issueChoiceId = choice.issue;
       this.tweets1 = [];
       this.tweets2 = [];
-      getIssueById(this.issueChoiceId)
+      getUserIssueById(this.issueChoiceId)
         .then(issue => {
+          console.log('issue', issue);
           this.issue = issue;
           this.searchTerms = this.issue.searchTerms;
         });

@@ -1,13 +1,21 @@
 <template>
   <ul id="issues-app">
     <li class="issue" v-for="issue in issues" :key="issue.id">
-    <router-link :to="`/issues/${issue.id}`">
+    <router-link v-if="issue.userId !== 0" :to="`/issues/${issue.id}`">
       <h3> {{issue.name}} </h3>
       <p class="issue__text">{{ issue.description}}</p>
       <div class="issue" v-for="searchterm in issue.searchTerms" :key="searchterm">
           <p> {{searchterm}} </p>
       </div>
     </router-link>
+    <a v-else>
+      <h3> {{issue.name}} </h3>
+      <p class="issue__text">{{ issue.description}}</p>
+      <div class="issue" v-for="searchterm in issue.searchTerms" :key="searchterm">
+          <p> {{searchterm}} </p>
+      </div>
+      <p class="reserved"> reserved search </p>
+    </a>
     </li>
 
   </ul>
@@ -66,5 +74,5 @@ li:hover {
 
 p {color: white;}
 
-
+.reserved {color: red; font-size: 8px;}
 </style>
