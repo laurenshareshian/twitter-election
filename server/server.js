@@ -105,29 +105,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// // temp solution to updating data...
-const fs = require('fs');
-// fs file paths are relative to pwd (cwd) aka where you started node
-// path to data file:
-const dataPath = 'data/tweets.json';
-
-function readData() {
-  // convenient method for reading file.
-  // DON'T ever use in production
-  const raw = fs.readFileSync(dataPath);
-  // make into js array with house objects
-  const data = JSON.parse(raw);
-
-  return data;
-}
-
-// read directly from json, not directly from twitter
-app.get('/api/oldtweets', (req, res) => {
-  const data = readData();
-  // send back the data:
-  res.send(data);
-});
-
 // setup a "route":
 // 1) HTTP METHOD, i.e. app.get === for GET requests
 // 2) PATH, i.e. '/api/houses` === the requested path
@@ -158,7 +135,6 @@ app.post('/api/tweets', (req, res) => {
           return fetchTweets(--callsToMake, params, allTweets);
         } else {
           console.log('im resolved', response);
-          fs.writeFileSync(dataPath, JSON.stringify(tweets));
           res.send(tweets);
           // return resolve(allTweets);
         }

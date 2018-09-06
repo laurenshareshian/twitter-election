@@ -88,11 +88,17 @@ export default {
             .then(tweets => {
               this.tweets1 = tweets;
               console.log(this.tweets1[0]);
+            })
+            .catch((error) => {
+              console.log('error: ', error);
             });
           getTweets({ screenName: this.screenName2 })
             .then(tweets => {
               this.tweets2 = tweets;
               this.loading = false;
+            })
+            .catch((error) => {
+              console.log('error: ', error);
             });
         });
       return choice;

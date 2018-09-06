@@ -125,6 +125,7 @@ export function getStateById(id) {
 }
 
 export function getTweets(screenName) {
+  console.log('dsa', screenName);
   return fetch(TWEETS_URL, {
     method: 'POST',
     headers: getHeaders(),

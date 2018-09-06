@@ -49,9 +49,9 @@ export default {
   data() {
     return {
       issue: initIssue(),
-      search1: '',
-      search2: '',
-      search3: ''
+      search1: null,
+      search2: null,
+      search3: null
     };
   },
   methods: {
@@ -60,14 +60,8 @@ export default {
       if(this.search2){
         this.issue.searchTerms.push(this.search2);
       }
-      else {
-        this.issue.searchTerms.push('XXX');
-      }
       if(this.search3){
         this.issue.searchTerms.push(this.search3);
-      }
-      else {
-        this.issue.searchTerms.push('XXX');
       }
       console.log(this.issue);
       return this.onAdd(this.issue);
