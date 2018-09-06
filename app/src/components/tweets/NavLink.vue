@@ -15,6 +15,7 @@
   text-decoration: none;
 }
 .router-link-active .nav-link {
-  background: lightsteelblue;
+  background: red;
+  opacity: 0.5;
 }
 </style>

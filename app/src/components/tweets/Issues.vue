@@ -5,8 +5,8 @@
       &nbsp;
       <NavLink to="/issues/new">add issue</NavLink>
       &nbsp;
-      <NavLink to="/issues/edit">update issue</NavLink>
-      &nbsp;
+      <!-- <NavLink to="/issues/edit">update issue</NavLink>
+      &nbsp; -->
     </nav>
     <RouterView 
       :issues="issues"
@@ -42,6 +42,12 @@ export default {
           this.$router.push('/issues');
         });
     }
+    // handleRemove(issue) {
+    //   return deleteIssue(issue.id)
+    //     .then(() => {
+    //       this.$router.push('/issues');
+    //     });
+    // }
   }
 };
 </script>

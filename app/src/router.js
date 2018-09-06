@@ -22,7 +22,7 @@ import Issues from './components/tweets/Issues.vue';
 import IssuesList from './components/tweets/IssuesList.vue';
 import AddIssue from './components/tweets/AddIssue.vue';
 import UpdateIssue from './components/tweets/UpdateIssue.vue';
-
+import IssueDetail from './components/tweets/IssueDetail.vue';
 
 export default new VueRouter({
   routes: [
@@ -34,7 +34,10 @@ export default new VueRouter({
       children: [
         { path: 'list', component: IssuesList },
         { path: 'new', component: AddIssue },
-        { path: 'edit', component: UpdateIssue },
+        // { path: 'edit', component: UpdateIssue },
+        { path: ':id', component: IssueDetail,
+          children: [{ path: 'edit', component: UpdateIssue }]
+        },
         { path: '', redirect: 'list' }
       ]
     },

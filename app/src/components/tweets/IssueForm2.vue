@@ -1,11 +1,11 @@
-<template id="tweet-template">
-  <section class="add-tweet">
+<template>
+<section class="add-tweet">
     <h3>Personalized Issue Search</h3>
     <form @submit.prevent="handleSubmit">
       <label>
        Search label (Ex: Gun Control)
         <input type="text" name="name" placeholder="Search Label" required
-          v-model="issue.name">
+          v-model="name">
       </label>
       <p> Enter up to three search terms. </p>
       <label>
@@ -23,54 +23,65 @@
       <input type="text" name="search3" placeholder="Search Term 3"
           v-model="search3">
       </label>
-      <label>
-        <button type="submit">Add</button>
-      </label>
+
+      <button type="submit">{{ isNew ? 'Add' : 'Update' }}</button>
+      <button v-if="onCancel" type="button" @click="onCancel">Cancel</button>
     </form>
   </section>
+
 </template>
 
 <script>
-
-const initIssue = () => {
-  return {
-    name: '', 
-    searchTerms: [],
-  };
-};
 export default {
   props: {
-    onAdd: {
-      type: Function
-    }
+    issue: Object,
+    onComplete: Function,
+    onCancel: Function
   },
   data() {
     return {
-      issue: initIssue(),
+      id: '',
+      name: '',
       search1: null,
       search2: null,
       search3: null
     };
   },
+  computed: {
+    isNew() {
+      return this.issue === undefined;
+    }
+  },
+  created() {
+    const issue = this.issue;
+    if(this.isNew) return;
+    this.name = issue.name;
+    this.search1 = issue.search1;
+    this.search2 = issue.search2;
+    this.search3 = issue.search3;
+  },
   methods: {
     handleSubmit() {
-      this.issue.searchTerms.push(this.search1);
-      if(this.search2){
-        this.issue.searchTerms.push(this.search2);
+      const issue = {
+        name: this.name,
+        search1: this.search1,
+        search2: this.search2,
+        search3: this.search3
+      };
+      if(!this.isNew) {
+        issue.key = this.issue.key;
       }
-      if(this.search3){
-        this.issue.searchTerms.push(this.search3);
-      }
-      console.log(this.issue);
-      return this.onAdd(this.issue);
+      this.onComplete(issue);
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
+
 section {
   font-family: 'Open Sans';
+  padding-top: 50px;
 }
 .add-tweet {
   width: 500px;
@@ -104,5 +115,4 @@ button {
 button:hover {
     transform: scale(1.1); 
 }
-
 </style>

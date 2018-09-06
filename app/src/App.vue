@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <header>
-      <!-- <router-link to="/">Home</router-link>
-      <router-link to="/tweets">Tweet Search</router-link>
-      <router-link to="/add">Add Search </router-link> -->
       <nav>
         <RouterLink to="/">Go to <strong>Home</strong></RouterLink>
         &nbsp;

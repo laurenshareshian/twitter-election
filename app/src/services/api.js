@@ -92,16 +92,17 @@ export function updateIssue(issue) {
     .then(responseHandler);
 }
 
-export function deleteIssue(issue) {
-  return fetch(ISSUES_URL, {
+export function deleteIssue(id) {
+  return fetch(`/api/issues/${id}`, {
     method: 'DELETE',
     headers: getHeaders(),
-    body: JSON.stringify(issue)
+    body: JSON.stringify()
   })
     .then(responseHandler);
 }
 
 export function getIssueById(id) {
+  console.log('id', id);
   return fetch(`/api/issues/${id}`, 
     {
       headers: getHeaders()

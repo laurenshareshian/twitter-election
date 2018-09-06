@@ -1,8 +1,9 @@
 <template>
   <div v-if="issue">
-    Hi
   <IssueForm v-if="issue"
     :issue="issue"
+    :onComplete="handleUpdate"
+    :onCancel="backToDetail"
   />
   </div>
 </template>
