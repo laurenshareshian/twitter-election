@@ -50,7 +50,8 @@ export default {
     return {
       issue: initIssue(),
       search1: '',
-      search2: ''
+      search2: '',
+      search3: ''
     };
   },
   methods: {
@@ -59,14 +60,17 @@ export default {
       if(this.search2){
         this.issue.searchTerms.push(this.search2);
       }
+      else {
+        this.issue.searchTerms.push('XXX');
+      }
       if(this.search3){
         this.issue.searchTerms.push(this.search3);
       }
+      else {
+        this.issue.searchTerms.push('XXX');
+      }
       console.log(this.issue);
-      addIssue(this.issue)
-        .then(() => {
-          this.$router.push('/tweets');}
-        );
+      return this.onAdd(this.issue);
     }
   }
 };

@@ -39,7 +39,7 @@ export default {
       return addIssue(issue)
         .then(saved => {
           this.issues.push(saved);
-          this.$router.push('/issues/list');
+          this.$router.push('/issues');
         });
     }
   }
