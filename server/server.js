@@ -166,29 +166,37 @@ function handleTweets(error, max_id, tweets, data, screen_name) {
   }
 }
 
-app.get('/api/issues', (req, res) => {
+
+app.get('/api/userissues', (req, res) => {
   client.query(`
     SELECT
       id,
+      user_id as "userId", 
       name,
       searchterms as "searchTerms"
-    FROM issues;
-  `)
+    FROM userissues
+    WHERE user_id = $1
+    OR user_id = 0;
+  `,
+  [req.userId]
+  )
     .then(result => {
       res.send(result.rows);
     });
 });
 
-app.get('/api/issues/:id', (req, res) => {
+app.get('/api/userissues/:id', (req, res) => {
   client.query(`
     SELECT 
       id,
+      user_id as "userId", 
       name,
       searchterms as "searchTerms"
-    FROM issues
-    WHERE id = $1;
+    FROM userissues
+    WHERE id = $1
+    AND user_id=$2;
   `,
-  [req.params.id]
+  [req.params.id, req.userId]
   )
     .then(result => {
       res.send(result.rows[0]);
@@ -197,16 +205,16 @@ app.get('/api/issues/:id', (req, res) => {
   
 });
 
-app.post('/api/issues', (req, res) => {
+app.post('/api/userissues', (req, res) => {
   console.log('posting');
   const body = req.body;
   console.log(body);
   client.query(`
-    INSERT INTO issues (name, searchterms)
-    VALUES ($1, $2)
-    RETURNING *;
+    INSERT INTO userissues (user_id, name, searchterms)
+    VALUES ($1, $2, $3)
+    returning *, user_id as "userId";
   `,
-  [body.name, body.searchTerms]
+  [req.userId, body.name, body.searchTerms]
   )
     .then(result => {
       // we always get rows back, in this case we just want first one.
@@ -215,18 +223,19 @@ app.post('/api/issues', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.put('/api/issues', (req, res) => {
+app.put('/api/userissues', (req, res) => {
   console.log('putting');
   const body = req.body;
   console.log(body);
   client.query(`
-    UPDATE issues 
+    UPDATE userissues 
     SET name = $2,
-        searchterms = $3
+        searchterms = $3,
+        user_id = $4
     WHERE id = $1
-    RETURNING *;
+    RETURNING *, user_id as "userId";
   `,
-  [body.id, body.name, body.searchTerms]
+  [body.id, body.name, body.searchTerms, req.userId]
   )
     .then(result => {
       // we always get rows back, in this case we just want first one.
@@ -235,10 +244,10 @@ app.put('/api/issues', (req, res) => {
     .catch(err => console.log(err));
 });
 
-app.delete('/api/issues/:id', (req, res) => {
+app.delete('/api/userissues/:id', (req, res) => {
   console.log('deleting');
   client.query(`
-    DELETE FROM issues
+    DELETE FROM userissues
     WHERE id = $1
     RETURNING *;
   `,
@@ -250,6 +259,7 @@ app.delete('/api/issues/:id', (req, res) => {
     .catch(err => console.log('here is your error', err));
   
 });
+
 
 app.get('/api/states', (req, res) => {
   client.query(`

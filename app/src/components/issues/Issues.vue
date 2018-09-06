@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { addIssue, getIssues } from '../../services/api';
+import { addUserIssue, getUserIssues } from '../../services/api';
 import NavLink from './NavLink';
 export default {
   data() {
@@ -26,28 +26,32 @@ export default {
     };
   },
   created() {
-    getIssues()
+    getUserIssues()
       .then(issues => {
         this.issues = issues;
       });
+  },
+  watch: {
+    issues(newIssues, oldIssues) {
+      if(newIssues !== oldIssues) {
+        getUserIssues()
+          .then(issues => {
+            this.issues = issues;
+          });
+      }
+    }
   },
   components: {
     NavLink
   },
   methods: {
     handleAdd(issue) {
-      return addIssue(issue)
+      return addUserIssue(issue)
         .then(saved => {
-          this.issues.push(saved);
+          console.log('inside handle add', saved);
           this.$router.push('/issues');
         });
     }
-    // handleRemove(issue) {
-    //   return deleteIssue(issue.id)
-    //     .then(() => {
-    //       this.$router.push('/issues');
-    //     });
-    // }
   }
 };
 </script>

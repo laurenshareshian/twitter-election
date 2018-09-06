@@ -12,6 +12,12 @@ client.query(`
       name VARCHAR(256) NOT NULL,
       searchterms VARCHAR(256) ARRAY[10]
     );
+    CREATE TABLE IF NOT EXISTS userissues (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER NOT NULL,
+      name VARCHAR(256) NOT NULL,
+      searchterms VARCHAR(256) ARRAY[10]
+    );
     CREATE TABLE IF NOT EXISTS states (
       id SERIAL PRIMARY KEY,
       name VARCHAR(256) NOT NULL,

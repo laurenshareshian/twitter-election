@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Edit issue</h2>
-    <IssueForm 
+    <UpdateIssueForm 
       label="Edit"
       :issue="issue"
       :onEdit="handleEdit"/>
@@ -10,7 +10,7 @@
 
 <script>
 import UpdateIssueForm from './UpdateIssueForm.vue';
-import { getIssueById, updateIssue } from '../../services/api';
+import { getUserIssueById, updateUserIssue } from '../../services/api';
 export default {
   components: { 
     UpdateIssueForm 
@@ -21,16 +21,16 @@ export default {
     };
   },
   created() {
-    getIssueById(this.$route.params.id)
+    getUserIssueById(this.$route.params.id)
       .then(issue => {
         this.issue = issue;
       });
   },
   methods: {
     handleEdit(issue) {
-      updateIssue(issue)
-        .then(added => {
-          this.$router.push(`/issues/${added.id}`);
+      updateUserIssue(issue)
+        .then(() => {
+          this.$router.push('/issues');
         });
     }
   }

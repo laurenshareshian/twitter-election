@@ -3,6 +3,7 @@ const AUTH_URL = `${URL}/auth`;
 const TWEETS_URL = `${URL}/tweets`;
 const ISSUES_URL = `${URL}/issues`;
 const STATES_URL = `${URL}/states`;
+const USERISSUES_URL = `${URL}/userissues`;
 
 function responseHandler(response) {
   if(response.ok) return response.json();
@@ -66,7 +67,51 @@ export function checkForToken() {
   token = user.id;
   return user;
 }
+//////////////////////////
+export function getUserIssues() {
+  return fetch(USERISSUES_URL, {
+    headers: getHeaders()
+  })
+    .then(responseHandler);
+}
 
+export function addUserIssue(issue) {
+  return fetch(USERISSUES_URL, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(issue)
+  })
+    .then(responseHandler);
+}
+
+export function updateUserIssue(issue) {
+  return fetch(USERISSUES_URL, {
+    method: 'PUT',
+    headers: getHeaders(),
+    body: JSON.stringify(issue)
+  })
+    .then(responseHandler);
+}
+
+export function deleteUserIssue(id) {
+  return fetch(`/api/userissues/${id}`, {
+    method: 'DELETE',
+    headers: getHeaders(),
+    body: JSON.stringify()
+  })
+    .then(responseHandler);
+}
+
+export function getUserIssueById(id) {
+  return fetch(`/api/userissues/${id}`, 
+    {
+      headers: getHeaders()
+    })
+    .then(response => response.json());
+}
+
+
+//////////////////////////
 export function getIssues() {
   return fetch(ISSUES_URL, {
     headers: getHeaders()
@@ -108,7 +153,7 @@ export function getIssueById(id) {
     })
     .then(response => response.json());
 }
-
+////////////////////////////////////////////////
 export function getStates() {
   return fetch(STATES_URL, {
     headers: getHeaders()

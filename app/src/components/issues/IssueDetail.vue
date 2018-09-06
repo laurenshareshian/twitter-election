@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { deleteIssue, getIssueById } from '../../services/api';
+import { deleteUserIssue, getUserIssueById } from '../../services/api';
 export default {
   props: {
     onRemove: {
@@ -32,14 +32,14 @@ export default {
     };
   },
   created() {
-    getIssueById(this.$route.params.id)
+    getUserIssueById(this.$route.params.id)
       .then(issue => {
         this.issue = issue;
       });
   },
   methods: {
     handleDelete() {
-      return deleteIssue(this.$route.params.id)
+      return deleteUserIssue(this.$route.params.id)
         .then(() => {
           this.$router.push('/issues');
         });

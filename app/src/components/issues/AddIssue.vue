@@ -61,7 +61,7 @@ export default {
       if(this.search3){
         this.issue.searchTerms.push(this.search3);
       }
-      console.log(this.issue);
+      console.log('inside handle submit', this.issue);
       return this.onAdd(this.issue);
     }
   }
