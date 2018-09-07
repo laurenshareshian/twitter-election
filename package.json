@@ -1,0 +1,19 @@
+{
+  "name": "twitter-election",
+  "version": "1.0.0",
+  "description": "An app that follows twitter feeds for 2018 Midterm Election Politicians",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurenshareshian/twitter-election.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurenshareshian/twitter-election/issues"
+  },
+  "homepage": "https://github.com/laurenshareshian/twitter-election#readme"
+}
