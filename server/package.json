@@ -1,19 +1,23 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "server.js",
+  "description": "",
+  "main": "http-server.js",
+  "engines": {
+    "node": "8"
+  },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "exit 0",
-    "start": "node server.js",
     "create-tables": "node scripts/create-tables.js",
     "drop-tables": "node scripts/drop-tables.js",
     "recreate-tables": "npm run drop-tables && npm run create-tables",
     "seed-states": "node scripts/seed-states.js",
     "seed-issues": "node scripts/seed-issues.js",
     "seed-data": "npm run seed-issues && npm run seed-states",
-    "db-load-all": "npm run recreate-tables && npm run seed-data"
+    "db-load-all": "npm run recreate-tables && npm run seed-data",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "exit 0",
+    "start": "node server.js"
   },
   "author": "Lauren Shareshian",
   "license": "ISC",
@@ -25,11 +29,11 @@
     "i": "^0.3.6",
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
+    "superagent": "^3.8.3",
     "twit": "^2.2.11"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
     "nodemon": "^1.18.3"
-  },
-  "description": ""
+  }
 }
