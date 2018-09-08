@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // require the express module (installed via `npm i express`)
 const express = require('express');
 

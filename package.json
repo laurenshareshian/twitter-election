@@ -4,7 +4,8 @@
   "description": "An app that follows twitter feeds for 2018 Midterm Election Politicians",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm i && npm start"
   },
   "repository": {
     "type": "git",
