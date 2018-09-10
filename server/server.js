@@ -24,6 +24,8 @@ app.use(express.json());
 // connect to the database
 const client = require('./db-client');
 
+// server files in public directory
+app.use(express.static('public'));
 
 /* TEMP DATABASE SOLUTION */
 
