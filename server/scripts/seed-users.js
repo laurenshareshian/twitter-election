@@ -1,5 +1,3 @@
-require('dotenv').config();
-require('dotenv').config();
 const client = require('../db-client');
 const users = require('./users.json');
 // const neighborhoods = require('./neighborhoods.json');

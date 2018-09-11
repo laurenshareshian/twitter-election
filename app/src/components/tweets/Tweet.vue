@@ -57,4 +57,12 @@ p {
   padding: 10px;
 }
 
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 500px) {
+
+      Tweet {
+        overflow: auto;
+      }
+    }
+}
 </style>

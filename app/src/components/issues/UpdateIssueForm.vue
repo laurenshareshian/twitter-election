@@ -65,43 +65,6 @@ export default {
 
 <style>
 
-/* section {
-  font-family: 'Open Sans';
-}
-.add-tweet {
-  width: 500px;
-  text-align: left;
-  margin: auto;
-}
-label {
-  display: block;
-  margin: 20px;
-}
-form {
-  margin: 50px;
-  background: white;
-  padding: 30px;
-  box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
-}
-p {
-  text-align: center;
-  text-transform: uppercase;
-}
-button {
-    background: #fa504d;
-    border: none;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 20px;
-    font-weight: 600;
-    box-shadow: -4px 2px 20px -6px rgba(0,0,0,0.75);
-    transition: all .2s ease-in-out;
-}
-button:hover {
-    transform: scale(1.1); 
-} */
-
 section {
   font-family: 'Open Sans';
 }
@@ -139,4 +102,14 @@ button:hover {
 }
 
 h3 {text-align: center;}
+
+
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 1080px) {
+        .add-issue {
+          width: 80%;
+        }
+    }
+}
+
 </style>

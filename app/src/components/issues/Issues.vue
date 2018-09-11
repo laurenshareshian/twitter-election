@@ -73,6 +73,7 @@ pre {
 }
 a {
   margin: 50px;
+  
 }
 
 </style>

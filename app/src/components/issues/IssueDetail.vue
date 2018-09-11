@@ -88,4 +88,16 @@ a {
     letter-spacing: 2px;
     color: white;
   }
+
+
+
+.reserved {color: red; font-size: 8px;}
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 1080px) {
+        button{
+          width: 30%;
+          margin-top: 40px;
+      }
+    }
+}
 </style>

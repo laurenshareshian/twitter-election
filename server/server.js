@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 // basic express app
 const express = require('express');
 const app = express();
@@ -10,9 +8,6 @@ const morgan = require('morgan');
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-
-// server files in public directory
-app.use(express.static('public'));
 
 // connect to the database
 const client = require('./db-client');
@@ -126,7 +121,7 @@ app.post('/api/tweets', (req, res) => {
   var max_id = 0;
   var old_max_id = 0;
 
-  function fetchTweets(callsToMake = 3, params = {}, allTweets = []) { 
+  function fetchTweets(callsToMake = 5, params = {}, allTweets = []) { 
     return new Promise(() => {
       twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
         [max_id, old_max_id, data, params] = handleTweets(error, max_id, tweets, data, screen_name);
@@ -142,7 +137,7 @@ app.post('/api/tweets', (req, res) => {
     });
   }
 
-  fetchTweets(2, params);
+  fetchTweets(5, params);
 
 });
 
@@ -296,5 +291,5 @@ app.get('/api/states/:id', (req, res) => {
 
 
 // start "listening" (run) the app (server)
-const PORT = process.env.PORT;
+const PORT = 3000;
 app.listen(PORT, () => console.log('server running on port', PORT));

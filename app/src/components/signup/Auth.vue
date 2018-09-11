@@ -152,4 +152,15 @@ input {
 button:hover {
     transform: scale(1.1); 
 } 
+
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 1080px) {
+        .signup-form {
+          width: 80%;
+        }
+    input {
+      width: 80%;
+    }
+    }
+}
 </style>

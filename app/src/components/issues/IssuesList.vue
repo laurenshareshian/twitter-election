@@ -75,4 +75,14 @@ li:hover {
 p {color: white;}
 
 .reserved {color: red; font-size: 8px;}
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 800px) {
+      ul {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        margin: 5%;
+      }
+    }
+}
+
+
 </style>

@@ -3,7 +3,8 @@
   <ChoicesForm :states="states"
                :issues="issues"
                :on-add="handleAdd"> </ChoicesForm>
-  <Politicians :state="state"
+  <Politicians v-if="state" 
+              :state="state"
               :pol1="pol1"
               :pol2="pol2"></Politicians>
   <div class="filtered-results">
@@ -126,5 +127,33 @@ ul.list {
 
 section {
   padding-bottom: 500px;
+}
+
+
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 500px) {
+
+      .filtered-results {
+        display: flex;
+        flex-direction: column;
+      }
+
+    section {
+      padding-bottom: 250px;
+      }
+    }
+}
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 1080px) {
+      .filtered-results {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+    section {
+      padding-bottom: 600px;
+      }
+    }
 }
 </style>

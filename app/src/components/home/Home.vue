@@ -70,9 +70,42 @@ a {
   color: white;
 }
 
+
+@supports ((display: -ms-grid) or (display: grid)) {
+    @media (max-width: 500px) {
+main {
+  background-image: url("/america.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  padding: 0px;
+ 
+}
+button {
+
+    margin-bottom:10vh;
+}
+h1 {
+  font-size: 40px;
+  color: black;
+  margin-bottom:200px !important;
+}
+
+    }
+}
+
+
 @supports ((display: -ms-grid) or (display: grid)) {
     @media (max-width: 1080px) {
-        button {margin-bottom: 400px;}
+main {
+  background-image: url("/america.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  padding: 100px;
+ 
+}
+
     }
 }
 </style>
